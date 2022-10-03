@@ -9,7 +9,8 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
     Rigidbody RocketRb;
-    [SerializeField] float mainThrust = 100f;
+    [SerializeField] float mainThrust = 2000f;
+    [SerializeField] float rotationFactor = 200f;
 
     // Start is called before the first frame update
     void Start()
@@ -36,11 +37,16 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
         {
-            UnityEngine.Debug.Log("Pressed A - Rotating Left");
+            applyRotation(rotationFactor);
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            UnityEngine.Debug.Log("Pressed D - Rotating Right");
+            applyRotation(-rotationFactor);
         }
+    }
+
+    void applyRotation(float rotationThisFrame)
+    {
+        transform.Rotate(UnityEngine.Vector3.forward * rotationThisFrame * Time.deltaTime);
     }
 }
