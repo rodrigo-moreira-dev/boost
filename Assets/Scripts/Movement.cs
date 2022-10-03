@@ -47,6 +47,8 @@ public class Movement : MonoBehaviour
 
     void applyRotation(float rotationThisFrame)
     {
+        RocketRb.freezeRotation = true;
         transform.Rotate(UnityEngine.Vector3.forward * rotationThisFrame * Time.deltaTime);
+        RocketRb.freezeRotation = false;
     }
 }
