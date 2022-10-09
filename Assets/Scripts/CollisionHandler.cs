@@ -18,9 +18,15 @@ public class CollisionHandler : MonoBehaviour
                 UnityEngine.Debug.Log("This is Fuel");
                 break; 
             default:
-                ReloadLevel();
+                StartCrashSequence(1f);
                 break;          
         }
+    }
+
+    void StartCrashSequence(float delay)
+    {
+        GetComponent<Movement>().enabled = false;
+        Invoke("ReloadLevel", delay);
     }
 
     void ReloadLevel()
