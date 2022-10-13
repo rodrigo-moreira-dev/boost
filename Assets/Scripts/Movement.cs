@@ -8,14 +8,20 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    Rigidbody RocketRb;
+
     [SerializeField] float mainThrust = 2000f;
     [SerializeField] float rotationFactor = 200f;
+    [SerializeField] AudioClip mainEngine;
+
+    Rigidbody RocketRb;
+    AudioSource audioSource;
+    bool isAlive;
 
     // Start is called before the first frame update
     void Start()
     {
         RocketRb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -30,6 +36,10 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             RocketRb.AddRelativeForce(UnityEngine.Vector3.up * mainThrust * Time.deltaTime);
+            if(!audioSource.isPlaying) 
+            {
+                audioSource.PlayOneShot(mainEngine);
+            }
         }
     }
 

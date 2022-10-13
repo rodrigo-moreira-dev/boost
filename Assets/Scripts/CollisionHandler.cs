@@ -4,29 +4,61 @@ using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
+    [SerializeField] AudioClip success;
+    [SerializeField] AudioClip crash;
+
+    [SerializeField] ParticleSystem successParticles;
+    [SerializeField] ParticleSystem crashParticles;
+
+    AudioSource audioSource;
+
+    bool isTransitioning = false;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     void OnCollisionEnter(Collision other)
     {
-        switch (other.gameObject.tag)
+        if (!isTransitioning)
         {
-            case "Respawn":
-                UnityEngine.Debug.Log("This is friendly");
-                break;
-            case "Finish":
-                NextLevel();
-                break;    
-            case "Fuel":
-                UnityEngine.Debug.Log("This is Fuel");
-                break; 
-            default:
-                StartCrashSequence(1f);
-                break;          
+        switch (other.gameObject.tag)
+            {
+                case "Respawn":
+                    UnityEngine.Debug.Log("This is friendly");
+                    break;
+                case "Finish":
+                    StartSuccessSequence(1f);
+                    break;    
+                case "Fuel":
+                    UnityEngine.Debug.Log("This is Fuel");
+                    break; 
+                default:
+                    StartCrashSequence(1f);
+                    break;          
+            }
         }
     }
 
     void StartCrashSequence(float delay)
     {
+        isTransitioning = true;
+        audioSource.Stop();
+        audioSource.PlayOneShot(crash);
+        crashParticles.Play();
         GetComponent<Movement>().enabled = false;
         Invoke("ReloadLevel", delay);
+    }
+
+    void StartSuccessSequence(float delay)
+    {
+        isTransitioning = true;
+        audioSource.Stop();
+        successParticles.Play();
+        audioSource.PlayOneShot(success);
+        GetComponent<Movement>().enabled = false;
+        Invoke("NextLevel", delay);
     }
 
     void ReloadLevel()
