@@ -39,22 +39,11 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            RocketRb.AddRelativeForce(UnityEngine.Vector3.up * mainThrust * Time.deltaTime);
-
-            if(!audioSource.isPlaying) 
-            {
-                audioSource.PlayOneShot(mainEngine);
-            }
-
-            if(!mainEngineParticles.isPlaying)
-            {
-                mainEngineParticles.Play();
-            }
+            StartThrusting();
         }
         else
         {
-            audioSource.Stop();
-            mainEngineParticles.Stop();
+            StopThrusting();
         }
     }
 
@@ -62,31 +51,65 @@ public class Movement : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.A))
         {
-            applyRotation(rotationFactor);
-            if (!leftThrusterParticles.isPlaying)
-            {
-                leftThrusterParticles.Play();
-            }
+            RotateLeft();
         }
         else if (Input.GetKey(KeyCode.D))
         {
-            applyRotation(-rotationFactor);
-            if (!rightThrusterParticles.isPlaying)
-            {
-                rightThrusterParticles.Play();
-            }
+            RotateRight();
         }
         else
         {
-            rightThrusterParticles.Stop();
-            leftThrusterParticles.Stop();
+            StopRotating();
         }
     }
 
-    void applyRotation(float rotationThisFrame)
+    void RotateLeft()
+    {
+        applyRotation(rotationFactor);
+        if (!leftThrusterParticles.isPlaying)
+        {
+            leftThrusterParticles.Play();
+        }
+    }
+
+    void RotateRight()
+    {
+        applyRotation(-rotationFactor);
+        if (!rightThrusterParticles.isPlaying)
+        {
+            rightThrusterParticles.Play();
+        }
+    }
+
+    void ApplyRotation(float rotationThisFrame)
     {
         RocketRb.freezeRotation = true;
         transform.Rotate(UnityEngine.Vector3.forward * rotationThisFrame * Time.deltaTime);
         RocketRb.freezeRotation = false;
+    }
+
+    void StartThrusting()
+    {
+        RocketRb.AddRelativeForce(UnityEngine.Vector3.up * mainThrust * Time.deltaTime);
+        if(!audioSource.isPlaying) 
+        {
+            audioSource.PlayOneShot(mainEngine);
+        }
+        if(!mainEngineParticles.isPlaying)
+        {
+            mainEngineParticles.Play();
+        }
+    }
+
+    void StopThrusting()
+    {
+        audioSource.Stop();
+        mainEngineParticles.Stop();
+    }
+
+    void StopRotating()
+    {
+        rightThrusterParticles.Stop();
+        leftThrusterParticles.Stop();
     }
 }
