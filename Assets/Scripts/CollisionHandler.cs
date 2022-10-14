@@ -1,3 +1,5 @@
+using System.Security.Cryptography;
+using System.ComponentModel;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,16 +15,33 @@ public class CollisionHandler : MonoBehaviour
     AudioSource audioSource;
 
     bool isTransitioning = false;
+    bool collisionDisabled = false;
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
     }
 
+    void Update() {
+        RespondToDebugKeys();
+    }
+
+    void RespondToDebugKeys()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            NextLevel();
+        }
+        else if (Input.GetKeyDown(KeyCode.C))
+        {
+            collisionDisabled = !collisionDisabled;
+        }
+    }
+
     void OnCollisionEnter(Collision other)
     {
-        if (!isTransitioning)
-        {
+        if (isTransitioning || collisionDisabled) { return; }
+        
         switch (other.gameObject.tag)
             {
                 case "Respawn":
@@ -38,7 +57,7 @@ public class CollisionHandler : MonoBehaviour
                     StartCrashSequence(1f);
                     break;          
             }
-        }
+        
     }
 
     void StartCrashSequence(float delay)

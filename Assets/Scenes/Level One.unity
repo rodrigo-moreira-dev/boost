@@ -187,6 +187,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1474637097125731843, guid: 9adb6c8325c34124ca280d89a5c4f9d8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 1474637097125731843, guid: 9adb6c8325c34124ca280d89a5c4f9d8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1646259834431853643, guid: 9adb6c8325c34124ca280d89a5c4f9d8, type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 0.21
+      objectReference: {fileID: 0}
     - target: {fileID: 2023491129097569010, guid: 9adb6c8325c34124ca280d89a5c4f9d8, type: 3}
       propertyPath: m_Name
       value: Rocket
@@ -403,6 +415,11 @@ ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 3701611450915451188, guid: 9adb6c8325c34124ca280d89a5c4f9d8, type: 3}
   m_PrefabInstance: {fileID: 281025381}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &878306051 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7217168075661784642, guid: 9adb6c8325c34124ca280d89a5c4f9d8, type: 3}
+  m_PrefabInstance: {fileID: 281025381}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,6 +565,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3fcdcc22ad9d3a408b0ff9f3a998d80, type: 3}
+--- !u!198 &1029367493 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6461525382689596647, guid: 9adb6c8325c34124ca280d89a5c4f9d8, type: 3}
+  m_PrefabInstance: {fileID: 281025381}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1261850766 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2023491129097569010, guid: 9adb6c8325c34124ca280d89a5c4f9d8, type: 3}
@@ -568,6 +590,9 @@ MonoBehaviour:
   mainThrust: 2000
   rotationFactor: 200
   mainEngine: {fileID: 8300000, guid: 153f2a673ec07b64ebdec58987937d07, type: 3}
+  mainEngineParticles: {fileID: 1636621865}
+  leftThrusterParticles: {fileID: 878306051}
+  rightThrusterParticles: {fileID: 1029367493}
 --- !u!54 &1261850772
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -757,6 +782,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 75cf9683c51fc5e43a4493ed28d18dad, type: 3}
+--- !u!198 &1636621865 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 1646259834431853643, guid: 9adb6c8325c34124ca280d89a5c4f9d8, type: 3}
+  m_PrefabInstance: {fileID: 281025381}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7238661737817278251
 PrefabInstance:
   m_ObjectHideFlags: 0
