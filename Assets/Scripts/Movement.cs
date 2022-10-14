@@ -65,7 +65,7 @@ public class Movement : MonoBehaviour
 
     void RotateLeft()
     {
-        applyRotation(rotationFactor);
+        ApplyRotation(rotationFactor);
         if (!leftThrusterParticles.isPlaying)
         {
             leftThrusterParticles.Play();
@@ -74,7 +74,7 @@ public class Movement : MonoBehaviour
 
     void RotateRight()
     {
-        applyRotation(-rotationFactor);
+        ApplyRotation(-rotationFactor);
         if (!rightThrusterParticles.isPlaying)
         {
             rightThrusterParticles.Play();
